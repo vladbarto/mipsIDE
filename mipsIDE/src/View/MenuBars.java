@@ -2,6 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.Formatter;
 
 public class MenuBars extends JPanel {
     private final JPanel leftSide, rightSide;
@@ -17,10 +19,10 @@ public class MenuBars extends JPanel {
         rightSide = new JPanel();
         swDayNight = new JToggleButton("Day");
         menuBar = new JMenuBar();
-        file    = new JMenu("File");
-        tools   = new JMenu("Tools");
-        run     = new JMenuItem("Run");
-        debug   = new JMenuItem("Debug");
+        file = new JMenu("File");
+        tools = new JMenu("Tools");
+        run = new JMenuItem("Run");
+        debug = new JMenuItem("Debug");
         newSubm = new JMenu("New...");
         newFile = new JMenuItem(" file");
         newProj = new JMenuItem(" project");
@@ -39,6 +41,17 @@ public class MenuBars extends JPanel {
         leftSide.add(menuBar);
         rightSide.add(swDayNight);
         this.setVisible(true);
+    }
+
+    public void addListenerDayNightButton(ActionListener actionListener) {
+        swDayNight.addActionListener(actionListener);
+    }
+
+    public void setDayOrNightMode(boolean isDay) {
+        //TODO: implement day and night mode
+        String message = isDay ? "Is day" : "Is night";
+        message += " in menu bar";
+        System.out.println(message);
     }
 
     private void menuBarContainer() {
