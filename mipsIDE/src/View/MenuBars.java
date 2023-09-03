@@ -3,6 +3,8 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuBars extends JPanel {
     private final JPanel leftSide, rightSide;
@@ -64,6 +66,16 @@ public class MenuBars extends JPanel {
         file.add(submenu);
         submenu.add(newFile);
         submenu.add(newProj);
+    }
+
+    public void dayMode() {
+        switchDayNight.setBackground(Color.decode("#4e5166"));
+        switchDayNight.setText("Day");
+
+    }
+    public void nightMode() {
+        switchDayNight.setBackground(Color.decode("#ede6d6"));
+        switchDayNight.setText("Night");
     }
 
 }

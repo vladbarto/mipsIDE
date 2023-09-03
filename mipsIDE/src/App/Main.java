@@ -1,11 +1,11 @@
 package App;
-import View.*;
 
-import java.awt.*;
+import Controller.*;
+import View.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         Screen screen = new Screen();
+        CtrlAll ctrlAll = new CtrlAll(screen);
     }
 }
