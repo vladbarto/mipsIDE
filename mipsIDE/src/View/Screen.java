@@ -17,7 +17,7 @@ public class Screen extends JFrame {
         this.codeArea = new CodeArea();
         this.borderLayout = new BorderLayout();
         this.structure = new Structure();
-        isDayMode = true;
+        isDayMode = false;
 
         detailsOnMain();
         this.setTitle("mips32 IDE - v1.0");
@@ -35,6 +35,13 @@ public class Screen extends JFrame {
         main.add(codeArea, BorderLayout.CENTER);
         main.add(structure, BorderLayout.WEST);
         menuBar.addListenerDayNightButton((e) -> {
+            if(!isDayMode) {
+                menuBar.dayMode();
+                codeArea.dayMode();
+            } else {
+                menuBar.nightMode();
+                codeArea.nightMode();
+            }
             this.isDayMode = !this.isDayMode;
             menuBar.setDayOrNightMode(this.isDayMode);
             codeArea.setDayOrNightMode(this.isDayMode);
