@@ -35,11 +35,9 @@ public class Screen extends JFrame {
         main.add(codeArea, BorderLayout.CENTER);
         main.add(comp, BorderLayout.WEST);
         menuBar.addListenerDayNightButton((e) -> {
-            boolean nextModeDayOrNight = !isDayMode;
-            this.isDayMode = nextModeDayOrNight;
-
-            menuBar.setDayOrNightMode(nextModeDayOrNight);
-            codeArea.setDayOrNightMode(nextModeDayOrNight);
+            this.isDayMode = !this.isDayMode;
+            menuBar.setDayOrNightMode(this.isDayMode);
+            codeArea.setDayOrNightMode(this.isDayMode);
         });
     }
 }
