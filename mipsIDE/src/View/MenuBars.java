@@ -3,27 +3,26 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Formatter;
 
 public class MenuBars extends JPanel {
     private final JPanel leftSide, rightSide;
-    private final JToggleButton swDayNight;
+    private final JToggleButton switchDayNight;
     private final JMenuBar menuBar;
     private final JMenu file, tools;
-    private final JMenu newSubm;
+    private final JMenu submenu;
     private final JMenuItem run, debug;
     private final JMenuItem newFile, newProj;
 
     public MenuBars() {
         leftSide = new JPanel();
         rightSide = new JPanel();
-        swDayNight = new JToggleButton("Day");
+        switchDayNight = new JToggleButton("Day");
         menuBar = new JMenuBar();
         file = new JMenu("File");
         tools = new JMenu("Tools");
         run = new JMenuItem("Run");
         debug = new JMenuItem("Debug");
-        newSubm = new JMenu("New...");
+        submenu = new JMenu("New...");
         newFile = new JMenuItem(" file");
         newProj = new JMenuItem(" project");
 
@@ -39,12 +38,12 @@ public class MenuBars extends JPanel {
         this.add(rightSide, BorderLayout.EAST);
         this.setBackground(Color.decode("#4e5166"));
         leftSide.add(menuBar);
-        rightSide.add(swDayNight);
+        rightSide.add(switchDayNight);
         this.setVisible(true);
     }
 
     public void addListenerDayNightButton(ActionListener actionListener) {
-        swDayNight.addActionListener(actionListener);
+        switchDayNight.addActionListener(actionListener);
     }
 
     public void setDayOrNightMode(boolean isDay) {
@@ -62,9 +61,9 @@ public class MenuBars extends JPanel {
         tools.add(run);
         tools.add(debug);
 
-        file.add(newSubm);
-        newSubm.add(newFile);
-        newSubm.add(newProj);
+        file.add(submenu);
+        submenu.add(newFile);
+        submenu.add(newProj);
     }
 
 }

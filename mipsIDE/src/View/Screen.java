@@ -8,7 +8,7 @@ public class Screen extends JFrame {
     private final MenuBars menuBar;
     private final BorderLayout borderLayout;
     private final CodeArea codeArea;
-    private final Structure comp;
+    private final Structure structure;
     private boolean isDayMode;
 
     public Screen() {
@@ -16,7 +16,7 @@ public class Screen extends JFrame {
         this.menuBar = new MenuBars();
         this.codeArea = new CodeArea();
         this.borderLayout = new BorderLayout();
-        this.comp = new Structure();
+        this.structure = new Structure();
         isDayMode = true;
 
         detailsOnMain();
@@ -33,7 +33,7 @@ public class Screen extends JFrame {
         main.add(menuBar, BorderLayout.NORTH);
         main.setBackground(Color.decode("#5d5b5d"));
         main.add(codeArea, BorderLayout.CENTER);
-        main.add(comp, BorderLayout.WEST);
+        main.add(structure, BorderLayout.WEST);
         menuBar.addListenerDayNightButton((e) -> {
             this.isDayMode = !this.isDayMode;
             menuBar.setDayOrNightMode(this.isDayMode);
