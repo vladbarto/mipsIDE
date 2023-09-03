@@ -5,12 +5,14 @@ import java.awt.*;
 
 public class CodeArea extends JPanel {
     private final JTextPane coding;
+
     public CodeArea() {
         coding = new JTextPane();
 
         area();
         initialiseUI();
     }
+
     public void area() {
         coding.setEditable(true);
         coding.setOpaque(false);
@@ -26,6 +28,12 @@ public class CodeArea extends JPanel {
         this.add(coding, BorderLayout.CENTER);
         this.setVisible(true);
     }
-    //TODO: a JPanel with line counting
 
+    //TODO: a JPanel with line counting
+    public void setDayOrNightMode(boolean isDay) {
+        //TODO: implement day and night mode
+        String message = isDay ? "Is day" : "Is night";
+        message += " In code area";
+        System.out.println(message);
+    }
 }

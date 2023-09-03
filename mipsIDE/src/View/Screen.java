@@ -5,8 +5,19 @@ import java.awt.*;
 
 public class Screen extends JFrame {
     private JPanel main;
+    private final MenuBars menuBar;
+    private final BorderLayout borderLayout;
+    private final CodeArea codeArea;
+    private final Structure structure;
+    private boolean isDayMode;
+
     public Screen() {
         this.main = new JPanel();
+        this.menuBar = new MenuBars();
+        this.codeArea = new CodeArea();
+        this.borderLayout = new BorderLayout();
+        this.structure = new Structure();
+        isDayMode = true;
 
         detailsOnMain();
         this.setTitle("mips32 IDE - v1.0");
@@ -18,10 +29,15 @@ public class Screen extends JFrame {
     }
 
     private void detailsOnMain() {
-        main.setLayout(new BorderLayout());
-        main.add(new MenuBars(), BorderLayout.NORTH);
+        main.setLayout(borderLayout);
+        main.add(menuBar, BorderLayout.NORTH);
         main.setBackground(Color.decode("#5d5b5d"));
-        main.add(new CodeArea(), BorderLayout.CENTER);
-        main.add(new Structure(), BorderLayout.WEST);
+        main.add(codeArea, BorderLayout.CENTER);
+        main.add(structure, BorderLayout.WEST);
+        menuBar.addListenerDayNightButton((e) -> {
+            this.isDayMode = !this.isDayMode;
+            menuBar.setDayOrNightMode(this.isDayMode);
+            codeArea.setDayOrNightMode(this.isDayMode);
+        });
     }
 }
