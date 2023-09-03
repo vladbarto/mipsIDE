@@ -1,11 +1,15 @@
 package View;
 
+import Controller.CtrlAll;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuBars extends JPanel {
     private final JPanel leftSide, rightSide;
-    private final JToggleButton swDayNight;
+    private JButton swDayNight;
     private final JMenuBar menuBar;
     private final JMenu file, tools;
     private final JMenu newSubm;
@@ -13,9 +17,9 @@ public class MenuBars extends JPanel {
     private final JMenuItem newFile, newProj;
 
     public MenuBars() {
-        leftSide = new JPanel();
-        rightSide = new JPanel();
-        swDayNight = new JToggleButton("Day");
+        leftSide    = new JPanel();
+        rightSide   = new JPanel();
+        swDayNight  = new JButton("Day");
         menuBar = new JMenuBar();
         file    = new JMenu("File");
         tools   = new JMenu("Tools");
@@ -26,7 +30,6 @@ public class MenuBars extends JPanel {
         newProj = new JMenuItem(" project");
 
         menuBarContainer();
-
         leftSide.setLayout(new FlowLayout(FlowLayout.LEFT));
         leftSide.setOpaque(false);
         rightSide.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -40,6 +43,9 @@ public class MenuBars extends JPanel {
         rightSide.add(swDayNight);
         this.setVisible(true);
     }
+    public JButton getSwDayNight() {
+        return swDayNight;
+    }
 
     private void menuBarContainer() {
         menuBar.setPreferredSize(new Dimension(200, 35));
@@ -52,6 +58,16 @@ public class MenuBars extends JPanel {
         file.add(newSubm);
         newSubm.add(newFile);
         newSubm.add(newProj);
+    }
+
+    public void dayMode() {
+        swDayNight.setBackground(Color.decode("#4e5166"));
+        swDayNight.setText("Day");
+
+    }
+    public void nightMode() {
+        swDayNight.setBackground(Color.decode("#ede6d6"));
+        swDayNight.setText("Night");
     }
 
 }
