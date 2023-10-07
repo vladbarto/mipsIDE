@@ -68,7 +68,6 @@ public class MenuBars extends JPanel {
     }
 
     public void dayMode() {
-        switchDayNight.setBackground(Color.decode("#4e5166"));
         switchDayNight.setText("Turn the light off");
         this.setBackground(Color.decode("#E1F8DC"));
     }
