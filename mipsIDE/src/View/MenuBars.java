@@ -55,6 +55,10 @@ public class MenuBars extends JPanel {
         System.out.println(message);
     }
 
+    public JMenuItem getSave() {
+        return save;
+    }
+
     private void menuBarContainer() {
         menuBar.setPreferredSize(new Dimension(200, 35));
         menuBar.add(file);

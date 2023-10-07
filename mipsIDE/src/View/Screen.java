@@ -2,6 +2,8 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Screen extends JFrame {
     private JPanel main;
@@ -45,6 +47,16 @@ public class Screen extends JFrame {
             this.isDayMode = !this.isDayMode;
             menuBar.setDayOrNightMode(this.isDayMode);
             codeArea.setDayOrNightMode(this.isDayMode);
+        });
+        addListenerForSave();
+    }
+
+    private void addListenerForSave() {
+        menuBar.getSave().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CodeArea.saveDocumentProgress(codeArea.getCoding(), "document.mips");
+            }
         });
     }
 }

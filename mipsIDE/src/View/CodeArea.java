@@ -5,6 +5,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +20,18 @@ public class CodeArea extends JPanel {
         initialiseUI();
         addCodingAreaListenerForText();
     }
+
+    public static void saveDocumentProgress(JTextPane coding, String docName) {
+        StyledDocument doc = (StyledDocument) coding.getDocument();
+        try (FileWriter writer = new FileWriter(docName);
+             BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
+            bufferedWriter.write(doc.getText(0, doc.getLength()));
+            System.out.println("save progress triggered");
+        } catch (IOException | BadLocationException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void area() {
         coding.setEditable(true);
         coding.setOpaque(false);
