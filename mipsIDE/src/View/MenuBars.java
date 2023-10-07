@@ -12,6 +12,7 @@ public class MenuBars extends JPanel {
     private final JMenu submenu;
     private final JMenuItem run, debug;
     private final JMenuItem newFile, newProj;
+    private final JMenuItem save;
 
     public MenuBars() {
         leftSide = new JPanel();
@@ -25,6 +26,7 @@ public class MenuBars extends JPanel {
         submenu = new JMenu("New...");
         newFile = new JMenuItem(" file");
         newProj = new JMenuItem(" project");
+        save = new JMenuItem("Save progress");
 
         menuBarContainer();
 
@@ -65,6 +67,7 @@ public class MenuBars extends JPanel {
         submenu.add(newFile);
         submenu.add(newProj);
         submenu.setOpaque(false);
+        file.add(save);
     }
 
     public void dayMode() {
@@ -75,5 +78,4 @@ public class MenuBars extends JPanel {
         switchDayNight.setText("Turn the light on");
         this.setBackground(Color.decode("#4e5166"));
     }
-
 }
