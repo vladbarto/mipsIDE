@@ -13,10 +13,10 @@ public class Screen extends JFrame {
     private final Structure structure;
     private boolean isDayMode;
 
-    public Screen() {
+    public Screen(String t) {
         this.main = new JPanel();
         this.menuBar = new MenuBars();
-        this.codeArea = new CodeArea();
+        this.codeArea = new CodeArea(t);
         this.borderLayout = new BorderLayout();
         this.structure = new Structure();
         isDayMode = false;
@@ -36,6 +36,7 @@ public class Screen extends JFrame {
         main.setBackground(Color.decode("#5d5b5d"));
         main.add(codeArea, BorderLayout.CENTER);
         main.add(structure, BorderLayout.WEST);
+        structure.setBackground(Color.magenta);
         menuBar.addListenerDayNightButton((e) -> {
             if(!isDayMode) {
                 menuBar.dayMode();

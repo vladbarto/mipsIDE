@@ -13,11 +13,31 @@ import java.util.List;
 
 public class CodeArea extends JPanel {
     private final JTextPane coding;
+    private final JTextPane lineNumbers;
+    private final JScrollPane lineNumbersScrollPane;
+    private final JScrollPane codingScrollPane;
+    public CodeArea(String t) {
+        setLayout(new BorderLayout());
 
-    public CodeArea() {
+        lineNumbers = createLineNumbersPane();
+        lineNumbersScrollPane = new JScrollPane(lineNumbers);
+        lineNumbersScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+
         coding = new JTextPane();
-        area();
+        area(t);
         initialiseUI();
+
+        codingScrollPane = new JScrollPane(coding);
+        codingScrollPane.getVerticalScrollBar().addAdjustmentListener(e -> {
+            lineNumbersScrollPane.getVerticalScrollBar().setValue(e.getValue());
+        });
+
+        add(lineNumbersScrollPane, BorderLayout.LINE_START);
+        add(codingScrollPane, BorderLayout.CENTER);
+        // We need both lines to make JScrollPane transparent
+        codingScrollPane.setOpaque(false);
+        codingScrollPane.getViewport().setOpaque(false);
+
         addCodingAreaListenerForText();
     }
 
@@ -32,13 +52,14 @@ public class CodeArea extends JPanel {
         }
     }
 
-    public void area() {
+    public void area(String t) {
         coding.setEditable(true);
         coding.setOpaque(false);
         //setFontSize(17);
         coding.setFont(new Font("☞Aktiv Grotesk Medium", Font.PLAIN, 17));
         coding.setForeground(Color.decode("#ffd59a"));
         coding.setContentType("text/plain");
+        coding.setText(t);
     }
 
     public void initialiseUI() {
@@ -52,10 +73,12 @@ public class CodeArea extends JPanel {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 highlightKeywords(coding);
+                updateLineNumbers();
             }
             @Override
             public void removeUpdate(DocumentEvent e) {
                 highlightKeywords(coding);
+                updateLineNumbers();
             }
             @Override
             public void changedUpdate(DocumentEvent e) {
@@ -120,6 +143,30 @@ public class CodeArea extends JPanel {
         StyleConstants.setFontSize(attrs, size);
         coding.setCharacterAttributes(attrs, true);
     }
+    private JTextPane createLineNumbersPane() {
+        JTextPane textPane = new JTextPane();
+        textPane.setEditable(false);
+        textPane.setBackground(Color.decode("#4A484A"));
+        textPane.setForeground(Color.decode("#ffd59a"));
+        textPane.setPreferredSize(new Dimension(30, Integer.MAX_VALUE)); // Adjust width as needed
+        textPane.setFont(new Font("☞Aktiv Grotesk Medium", Font.PLAIN, 17));
+
+        StyledDocument doc = textPane.getStyledDocument();
+        SimpleAttributeSet center = new SimpleAttributeSet();
+        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
+        doc.setParagraphAttributes(0, 1, center, false);
+
+        return textPane;
+    }
+    private void updateLineNumbers() {
+        String text = coding.getText();
+        String[] lines = text.split("\n");
+        StringBuilder lineNumbersText = new StringBuilder();
+        for (int i = 1; i <= lines.length; i++) {
+            lineNumbersText.append(i).append("\n");
+        }
+        lineNumbers.setText(lineNumbersText.toString());
+    }
     public void setDayOrNightMode(boolean isDay) {
         //TODO: implement day and night mode
         String message = isDay ? "Is day" : "Is night";
@@ -130,11 +177,15 @@ public class CodeArea extends JPanel {
         changeBgColour("#dae0f2");
         coding.setFont(new Font("☞Aktiv Grotesk Medium", Font.PLAIN, 17)); //TODO: in-/decrease size as I like
         coding.setForeground(Color.decode("#700548"));
+        lineNumbers.setBackground(Color.decode("#BBC2D3"));
+        lineNumbers.setForeground(Color.decode("#700548"));
     }
     public void nightMode() {
         this.setBackground(Color.decode("#3e3d3e"));
         coding.setFont(new Font("☞Aktiv Grotesk Medium", Font.PLAIN, 17)); //TODO: in-/decrease size as I like
         coding.setForeground(Color.decode("#ffd59a"));
+        lineNumbers.setBackground(Color.decode("#4A484A"));
+        lineNumbers.setForeground(Color.decode("#ffd59a"));
     }
     private void changeBgColour(String colour) {
         this.setBackground(Color.decode(colour));
